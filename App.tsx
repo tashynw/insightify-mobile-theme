@@ -12,25 +12,27 @@ import {Dimensions, SafeAreaView, StatusBar} from 'react-native';
 import HomePage from './pages/Home';
 import BottomNavigationBar from './components/BottomNavigationBar';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import MessagesPage from './pages/Messages';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
     <GluestackUIProvider config={config}>
-      <SafeAreaView style={Colors.lighter}>
+      <NavigationContainer>
         <StatusBar barStyle="light-content" />
-        {/*body*/}
-        <ScrollView w="100%">
-          <Box
-            w="100%"
-            alignItems="flex-start"
-            bg="white"
-            minHeight={Dimensions.get('window').height}
-            p={20}>
-            <HomePage />
-          </Box>
-        </ScrollView>
-        <BottomNavigationBar />
-      </SafeAreaView>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name="Messages" component={MessagesPage} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      {/* <BottomNavigationBar /> */}
     </GluestackUIProvider>
   );
 }

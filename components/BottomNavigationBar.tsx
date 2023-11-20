@@ -11,20 +11,22 @@ import {
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const BottomNavigationBar = (props: Props) => {
+const BottomNavigationBar = ({navigation}: Props) => {
   return (
     <HStack
       w="100%"
       alignItems="center"
       p="$6"
-      bg="$white"
+      bg="$coolGray100"
       mt="$5"
       justifyContent="space-between"
       position="absolute"
       bottom={0}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
         <Icon
           as={HomeIcon}
           size={25 as any}
@@ -32,7 +34,7 @@ const BottomNavigationBar = (props: Props) => {
           color="$trueGray500"
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
         <Icon as={MessageCircle} size={25 as any} color="$trueGray500" />
       </TouchableOpacity>
       <TouchableOpacity>
